@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hackbright Coffee Shop</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link href="static/coffee.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+    <div class="starter-template">
+        <h1>Coffee Shop</h1>
+        <br>
+
+        <img id="coffee_image" src="LOLWUT" alt="make this image work" height="300" width="200">
+
+        <h3 id="message">Click The Image To Order Coffee</h3>
+
+        <table class="table">
+            <tr>
+                <td class="col-md-2">
+                    <button class="btn btn-default" id="espresso">Espresso</button>
+                </td>
+                <td class="col-md-2">
+                    <button class="btn btn-default" id="latte">Latte</button>
+                </td>
+                <td class="col-md-2">
+                    <button class="btn btn-default" id="hot-chocolate">Hot Chocolate</button>
+                </td>
+            </tr>
+            <tr>
+                <td>$3.25</td>
+                <td>$4.15</td>
+                <td>$2.50</td>
+            </tr>
+        </table>
+
+        <h4>Total: <span id="revenue">You haven't purchased anything yet!</span></h4>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<script>
+    "use strict";
+    
+    var myRevenueMessage = $("#revenue");
+
+    $('#coffee_image').attr("src", "static/coffee_beans.jpg");
+
+    var drinksOrdered = [];
+    var prices = {
+        'espresso':3.25,
+        'latte':4.15,
+        'hot-chocolate': 2.50 
+    };
+    var total = 0
+
+    function makeCoffee(drinkType) {
+         $('#coffee_image').attr('src', "static/coffee_machine.jpg");
+
+         setTimeout(function() {
+             $('#coffee_image').attr("src", "static/coffee_mug.jpg");
+         }, 1500);
+
+         setTimeout(function() {
+             $('#coffee_image').attr("src", "static/coffee_beans.jpg");
+         }, 4000);
+
+         drinksOrdered.push(drinkType);
+         console.log(drinksOrdered);
+         var totalTotal=revenue().toFixed(2);
+         myRevenueMessage.html('You owe $' + totalTotal);
+    }
+
+    function revenue() {
+        for (var i=0; i<drinksOrdered.length; i++) {
+            total += prices[drinksOrdered[i]];
+            return total;
+        }
+    }
+
+    $('#coffee_image').on("click", makeCoffee);
+    var espresso = $("#espresso");
+    var latte = $("#latte");
+    var hotChocolate = $("#hot-chocolate");
+
+    espresso.on('click', function(){makeCoffee("espresso")});
+    latte.on('click', function(){makeCoffee("latte")});
+    hotChocolate.on('click', function(){makeCoffee("hot-chocolate")});
+
+</script>
+
+</body>
+</html>
